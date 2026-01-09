@@ -27,8 +27,8 @@ export const makeStudent=async(req:Request,res:Response)=>{
         });
     } 
     const user=(req as any).user;
-    const userId=(req as any).userId;
-    const name=(req as any).name;
+    const userId=user.userId;
+    const name=user.name;
     const gmail=user.gmail;
     const makeNewStudent=await StudentModel.create({
         userId:userId,
