@@ -1,6 +1,7 @@
 import {Request,response,Response} from 'express';
 import { Resend } from 'resend';
 import {userModel} from '../models/userModel';
+import { authValidator } from '../validators/authValidator';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -17,6 +18,17 @@ if(!name || !gmail || !password){
         message:"Enter proper detail"
     }); 
 }
+const result=authValidator({name,password});
+if(result.message=== 'name should be atleast of 3 characters'){
+    return res.status(401).json({
+        message:"name should be of 3 character",
+    });
+}
+if(result.message=== 'password should be of 3 character'){
+    return res.status(401).json({
+        message:"password should be of 3 character",
+    });
+}
 const check=await userModel.findOne({gmail});
 if(check){
     return res.status(401).json({
@@ -30,8 +42,9 @@ bcrypt.genSalt(12, function(err, salt) {
     name,
     gmail,
     password:hash,
+    role:"Student"
 });
-let token=jwt.sign({gmail:gmail,userId:newUser._id},process.env.JWT_SECRET!);
+let token=jwt.sign({name:name,gmail:gmail,userId:newUser._id,role:newUser.role},process.env.JWT_SECRET!);
 res.cookie("token",token,{
     httpOnly:true,
     secure:true,
@@ -65,7 +78,7 @@ export const getSignIn=async(req:Request,res:Response)=>{
             message:"Password is incorrect",
         });
     }
-    let token=jwt.sign({gmail:gmail,userId:checkUser._id},process.env.JWT_SECRET!);
+    let token=jwt.sign({name:checkUser.name,gmail:gmail,userId:checkUser._id,role:checkUser.role},process.env.JWT_SECRET!);
     res.cookie("token",token,{
         httpOnly:true,
         secure:true,
@@ -77,6 +90,7 @@ export const getSignIn=async(req:Request,res:Response)=>{
             _id:checkUser._id,
             name:checkUser.name,
             gmail:checkUser.gmail,
+            role:checkUser.role,
         },
         message:"Login Successfully",
     });
