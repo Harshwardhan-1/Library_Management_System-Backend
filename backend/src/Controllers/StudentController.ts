@@ -58,12 +58,13 @@ export const checkStudent=async(req:Request,res:Response)=>{
         });
     }
     const checkExist=await StudentModel.findOne({gmail});
-    if(checkExist){
+    if(!checkExist){
         return res.status(401).json({
-            message:"user alreadyExist",
+            message:"user not found",
         });
     }
     return res.status(200).json({
-        message:"user Not Exist",
+        message:"user Exist",
+        data:checkExist,
     });
 }
