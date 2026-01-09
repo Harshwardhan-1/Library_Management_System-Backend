@@ -15,7 +15,7 @@ const studentSchema=new mongoose.Schema({
     },
     rollNo:{
         type:String,
-        requiered:true,
+        required:true,
     },
     department:{
         type:String,
