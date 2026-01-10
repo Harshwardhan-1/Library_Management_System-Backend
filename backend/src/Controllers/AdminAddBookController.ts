@@ -91,3 +91,23 @@ export const getEceBook=async(req:Request,res:Response)=>{
         data:findEce,
     });
 }
+
+
+
+export const handleDelete=async(req:Request,res:Response)=>{
+    const {id}=req.body;
+    if(!id){
+        return res.status(401).json({
+            message:"provide id",
+        });
+    }
+    const findAndDelete=await AdminBookModel.findByIdAndDelete({id});
+    if(!findAndDelete){
+        return res.status(401).json({
+            message:"error",
+        });
+    }
+    return res.status(200).json({
+        message:"book deleted successfully",
+    });
+}
