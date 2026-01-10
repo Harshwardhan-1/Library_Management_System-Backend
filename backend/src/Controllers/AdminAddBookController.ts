@@ -111,3 +111,25 @@ export const handleDelete=async(req:Request,res:Response)=>{
         message:"book deleted successfully",
     });
 }
+
+
+
+
+export const handleStudent=async(req:Request,res:Response)=>{
+    const {department}=req.body;
+    if(!department){
+        return res.status(401).json({
+            message:"provide proper detail",
+        });
+    }
+    const findIt=await AdminBookModel.find({department});
+    if(findIt.length===0){
+        return res.status(401).json({
+            message:"no record found",
+        })
+    }
+    return res.status(200).json({
+        message:"showBooks",
+        data:findIt,
+    });
+}
