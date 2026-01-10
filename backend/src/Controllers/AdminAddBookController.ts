@@ -63,7 +63,7 @@ if(findDept.length===0){
     });
 }
 return res.status(200).json({
-    mesage:"foundbooks",
-    data:"findDept",
+    message:"foundbooks",
+    data:findDept,
 });
 }
