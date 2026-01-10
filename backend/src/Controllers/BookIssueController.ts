@@ -10,7 +10,7 @@ if(!author || !department || !quantity){
         message:"provide proper details",
     });
 }
-const user=(req as any);
+const user=(req as any).user;
 const gmail=user.gmail;
 const userId=user.userId;
 const findIt=await bookIssueModel.findOne({userId,author,department});
