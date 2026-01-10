@@ -16,6 +16,7 @@ app.use(cors({
 })); 
 import userRouter from "./Routes/userRoutes";
 import studentRoutes from "./Routes/StudentRoutes";
+import AdminBooksRoutes from "./Routes/AdminAddBookRoutes";
 app.get("/",(req : Request,res:Response)=>{
   res.send("hii harsh here")
 })
@@ -26,6 +27,7 @@ mongoose.connect(process.env.MONGO_URL!)
 
 app.use("/api/all",userRouter);
 app.use("/api/student",studentRoutes);
+app.use('/api/admin',AdminBooksRoutes);
 const PORT=process.env.PORT || 4000;
 app.listen(PORT,()=>{
   console.log(`Server is listening to http://localhost:${PORT}`)
