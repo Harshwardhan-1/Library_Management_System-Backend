@@ -20,7 +20,8 @@ import AdminBooksRoutes from "./Routes/AdminAddBookRoutes";
 app.get("/",(req : Request,res:Response)=>{
   res.send("hii harsh here")
 })
-// MongoDB Atlas connection
+
+
 mongoose.connect(process.env.MONGO_URL!)
     .then(() => console.log("MongoDB connected"))
     .catch(err => console.log(err));

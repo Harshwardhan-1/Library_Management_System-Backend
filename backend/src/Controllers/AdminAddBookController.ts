@@ -74,3 +74,20 @@ return res.status(200).json({
     data:findDept,
 });
 }
+
+
+
+export const getEceBook=async(req:Request,res:Response)=>{
+    const user=(req as any).user;
+    const userId=user.userId;
+    const findEce=await AdminBookModel.find({userId,department:"ECE"});
+    if(findEce.length===0){
+        return res.status(401).json({
+            message:"not found",
+        });
+    }
+    return res.status(200).json({
+        message:"book found",
+        data:findEce,
+    });
+}
