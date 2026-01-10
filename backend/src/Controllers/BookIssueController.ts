@@ -19,18 +19,16 @@ if(findIt){
         message:"you already send request for this book",
     });
 }
+let request=0;
   const Request=await bookIssueModel.findOne({gmail});
-  if(!Request){
-    return res.status(401).json({
-        message:"user not found",
-    })
-  }
-  if(Request.requestIssue===3){
+  if(Request){
+   if(Request.requestIssue===3){
     return res.status(401).json({
         message:"you have already send 3 book issue request",
     });
   }
-  const request=Request.requestIssue;
+   request=Request.requestIssue;
+  }
 const createIssue=await bookIssueModel.create({
     userId:userId,
     name:user.name,
