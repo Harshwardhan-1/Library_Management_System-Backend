@@ -1,6 +1,6 @@
 import { AdminBookModel} from "../models/AdminAddBookModel";
 import {Request,Response} from 'express';
-
+import { BookIdValidator } from "../validators/BookIdValidator";
 export const getAllBooks=async(req:Request,res:Response)=>{
     const allBooks=await AdminBookModel.find();
     return res.status(200).json({
@@ -16,6 +16,13 @@ if(!bookName || !author || !isbn || !department || !quantity){
         message:"fill proper detail",
     });
 }
+const result=BookIdValidator(isbn);
+if(!result.valid){
+    return res.status(401).json({
+        message:"Id must have atleast 3 characters",
+    });
+}
+
 const checkSame=await AdminBookModel.findOne({bookName,author,isbn});
 if(checkSame){
     return res.status(401).json({
