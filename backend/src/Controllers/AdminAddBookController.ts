@@ -16,7 +16,7 @@ if(!bookName || !author || !isbn || !department || !quantity){
         message:"fill proper detail",
     });
 }
-const result=BookIdValidator(isbn);
+const result=BookIdValidator({isbn});
 if(!result.valid){
     return res.status(401).json({
         message:"Id must have atleast 3 characters",
