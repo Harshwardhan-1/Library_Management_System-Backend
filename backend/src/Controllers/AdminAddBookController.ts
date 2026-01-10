@@ -101,9 +101,9 @@ export const handleDelete=async(req:Request,res:Response)=>{
             message:"provide id",
         });
     }
-    const findAndDelete=await AdminBookModel.findByIdAndDelete({id});
+    const findAndDelete=await AdminBookModel.findByIdAndDelete(id);
     if(!findAndDelete){
-        return res.status(401).json({
+        return res.status(404).json({
             message:"error",
         });
     }
