@@ -5,6 +5,6 @@ import verifyStudent from '../middleware/verifyStudent';
 
 import { bookIssue } from '../Controllers/BookIssueController';
 
-bookIssueRoutes.post("/bookIssue",verifyToken,verifyStudent,bookIssue);
+bookIssueRoutes.post("/bookRequest",verifyToken,verifyStudent,bookIssue);
 
 export default bookIssueRoutes;
