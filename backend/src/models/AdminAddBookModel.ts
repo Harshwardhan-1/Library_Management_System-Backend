@@ -25,7 +25,7 @@ const AdminAddBookSchema=new mongoose.Schema({
     },
     
     quantity:{
-        type:String,
+        type:Number,
         required:true,
     },
 })

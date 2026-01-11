@@ -1,5 +1,6 @@
 import { approvedModel } from "../models/bookApprovedModel";
 import { Resend } from "resend";
+import { AdminBookModel } from "../models/AdminAddBookModel";
 import {Request,Response} from 'express';
 const resend = new Resend(process.env.RESEND_API_KEY)  
 
@@ -18,6 +19,23 @@ if(findIt){
         message:"email already send to this person",
     });
 }
+
+const book=await AdminBookModel.findOne({author});
+if(!book){
+    return res.status(401).json({
+        message:"book not found",
+    });
+}
+
+if(book.quantity<=0){
+    return res.status(401).json({
+        message:"Out Of Stock",
+    });
+}
+
+book.quantity=book.quantity-1;
+await book.save();
+
 const approved=await approvedModel.create({
 userId,
 name,

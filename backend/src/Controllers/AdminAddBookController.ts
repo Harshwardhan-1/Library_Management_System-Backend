@@ -43,7 +43,7 @@ bookName,
 author,
 isbn,
 department,
-quantity,
+quantity:Number(quantity),
 });
 return res.status(200).json({
     message:"book added successfully",
