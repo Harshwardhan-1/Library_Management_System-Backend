@@ -1,6 +1,18 @@
 import { bookIssueModel} from "../models/BookIssueModel";
 import {Request,Response} from 'express';
 
+export const getAllIssue=async(req:Request,res:Response)=>{
+const allRequest=await bookIssueModel.find();
+if(allRequest.length=== 0){
+    return res.status(401).json({
+        message:"no issue yet",
+    });
+}
+return res.status(200).json({
+    message:"here are all the issue request",
+    data:allRequest,
+});
+}
 
 
 export const bookIssue=async(req:Request,res:Response)=>{
