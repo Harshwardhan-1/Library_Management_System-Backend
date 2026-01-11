@@ -12,7 +12,12 @@ if(!userId || !name || !gmail || !author || !department){
         message:"details are required",
     });
 }
-
+const findIt=await approvedModel.findOne({userId,name,gmail});
+if(findIt){
+    return res.status(401).json({
+        message:"email already send to this person",
+    });
+}
 const approved=await approvedModel.create({
 userId,
 name,
