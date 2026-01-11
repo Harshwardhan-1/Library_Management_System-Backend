@@ -13,7 +13,7 @@ if(!userId || !name || !gmail || !isbn || !author || !date){
         message:"provide proper detail",
     });
 }
-const increaseQuantity=await AdminBookModel.findOne({userId,isbn,author});
+const increaseQuantity=await AdminBookModel.findOne({isbn,author});
 if(!increaseQuantity){
     return res.status(401).json({
         message:"not found",
