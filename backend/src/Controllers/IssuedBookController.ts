@@ -23,6 +23,7 @@ const createIssued=await issuedModel.create({
     gmail,
     isbn,
     author,
+    date:Date.now(),
 });
 return res.status(200).json({
     message:"added successfully",
