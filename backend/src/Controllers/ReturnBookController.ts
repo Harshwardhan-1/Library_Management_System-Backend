@@ -1,6 +1,7 @@
 import {Request,Response} from 'express';
 import { returnModel } from '../models/BookReturnModel';
 import { AdminBookModel } from '../models/AdminAddBookModel';
+import { issuedModel } from '../models/IssuedBookModel';
 import { Resend } from 'resend';
 const resend=new Resend(process.env.RESEND_API_KEY);
 
@@ -53,5 +54,26 @@ await resend.emails.send({
 return res.status(200).json({
     message:"successfully created",
     data:makeReturn,
+});
+}
+
+
+
+
+export const deleteIt=async(req:Request,res:Response)=>{
+const {userId,isbn,author}=req.body;
+if(!userId || !isbn || !author){
+    return res.status(401).json({
+        message:"provide proper detail",
+    });
+}
+const findIt=await issuedModel.findOneAndDelete({isbn,author});
+if(!findIt){
+return res.status(401).json({
+    message:"not found",
+});
+}
+return res.status(200).json({
+    message:"user Deleted",
 });
 }
