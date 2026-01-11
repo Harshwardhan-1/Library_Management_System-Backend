@@ -19,6 +19,7 @@ import studentRoutes from "./Routes/StudentRoutes";
 import AdminBooksRoutes from "./Routes/AdminAddBookRoutes";
 import bookIssueRoutes from "./Routes/BookIssueRoutes";
 import approveRoutes from "./Routes/ApproveRoutes";
+import issuedRoutes from "./Routes/IssuedBooksRoutes";
 app.get("/",(req : Request,res:Response)=>{
   res.send("hii harsh here")
 })
@@ -33,6 +34,7 @@ app.use("/api/student",studentRoutes);
 app.use('/api/admin',AdminBooksRoutes);
 app.use('/api/issue',bookIssueRoutes);
 app.use('/api/approve',approveRoutes);
+app.use('/api/issued',issuedRoutes);
 const PORT=process.env.PORT || 4000;
 app.listen(PORT,()=>{
   console.log(`Server is listening to http://localhost:${PORT}`)
