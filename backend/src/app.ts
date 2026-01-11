@@ -32,7 +32,7 @@ app.use("/api/all",userRouter);
 app.use("/api/student",studentRoutes);
 app.use('/api/admin',AdminBooksRoutes);
 app.use('/api/issue',bookIssueRoutes);
-app.use('api/approved',approvedRoutes);
+app.use('/api/approved',approvedRoutes);
 const PORT=process.env.PORT || 4000;
 app.listen(PORT,()=>{
   console.log(`Server is listening to http://localhost:${PORT}`)

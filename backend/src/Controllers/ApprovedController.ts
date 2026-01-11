@@ -1,7 +1,10 @@
 import { approvedModel } from "../models/bookApprovedModel";
 import { Resend } from "resend";
 import {Request,Response} from 'express';
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = new Resend(process.env.RESEND_API_KEY)  
+
+
+
 export const approveRequest=async(req:Request,res:Response)=>{
 const {userId,name,gmail,author,department}=req.body;
 if(!userId || !name || !gmail || !author || !department){
