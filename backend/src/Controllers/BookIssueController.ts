@@ -16,8 +16,8 @@ return res.status(200).json({
 
 
 export const bookIssue=async(req:Request,res:Response)=>{
-const {author,department,quantity}=req.body;
-if(!author || !department || !quantity){
+const {isbn,author,department,quantity}=req.body;
+if(!isbn ||!author || !department || !quantity){
     return res.status(401).json({
         message:"provide proper details",
     });
@@ -45,6 +45,7 @@ const createIssue=await bookIssueModel.create({
     userId:userId,
     name:user.name,
     gmail:user.gmail,
+    isbn,
     author,
     department,
     quantity,  
