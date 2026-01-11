@@ -4,8 +4,8 @@ import verifyToken from '../middleware/verifyToken';
 import verifyAdmin from '../middleware/verifyAdmin';
 
 
-import { approveIt } from '../Controllers/ApproveController';
+import { approveIt,deleteRequest } from '../Controllers/ApproveController';
 approveRoutes.post('/approveRequest',verifyToken,verifyAdmin,approveIt);
-
+approveRoutes.post('/deleteRequest',verifyToken,verifyAdmin,deleteRequest)
 
 export default approveRoutes;
