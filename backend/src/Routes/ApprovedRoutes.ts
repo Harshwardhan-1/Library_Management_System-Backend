@@ -5,6 +5,6 @@ import verifyAdmin from '../middleware/verifyAdmin';
 import { approveRequest } from '../Controllers/ApprovedController';
 
 
-approvedRoutes.post('/Approved',verifyToken,verifyAdmin,approveRequest);
+approvedRoutes.post('/approved',verifyToken,verifyAdmin,approveRequest);
 
 export default approvedRoutes;
