@@ -43,7 +43,9 @@ await resend.emails.send({
       from: process.env.EMAIL_FROM!,
       to: gmail,
       subject: "your approve is successfully confirmed",
-      text: `Hello ${name} your request is successfully confirmed for issuing a book,
+      text: `Hello ${name} your request is successfully confirmed for issuing a book
+      you have to return it within 3 days
+      ,
 
        Regards,
        HarshLibrary Team`,
