@@ -11,7 +11,7 @@ export const getAllBooks=async(req:Request,res:Response)=>{
 
 export const AdminAddBook=async(req:Request,res:Response)=>{
 const {bookName,author,isbn,department,quantity}=req.body;
-if(!bookName || !author || !isbn || !department || !quantity){
+if(!bookName || !author || !isbn || !department ){
     return res.status(401).json({
         message:"fill proper detail",
     });
@@ -21,6 +21,12 @@ if(!result.valid){
     return res.status(401).json({
         message:"Id must have atleast 3 characters",
     });
+}
+
+if(quantity<=0){
+    return res.status(401).json({
+        message:"quantity must be atleast 1"
+    })
 }
 
 const checkSame=await AdminBookModel.findOne({bookName,author,isbn});
