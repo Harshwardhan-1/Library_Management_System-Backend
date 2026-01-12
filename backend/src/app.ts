@@ -21,8 +21,14 @@ import bookIssueRoutes from "./Routes/BookIssueRoutes";
 import approveRoutes from "./Routes/ApproveRoutes";
 import issuedRoutes from "./Routes/IssuedBooksRoutes";
 import returnBookRoutes from "./Routes/returnBookRoutes";
+import fineStudents from "./Routes/FineStudentRoutes";
 app.get("/",(req : Request,res:Response)=>{
   res.send("hii harsh here")
+})
+
+
+app.get('/ping',(req:Request,res:Response)=>{
+  res.send('Alive');
 })
 
 
@@ -37,6 +43,7 @@ app.use('/api/issue',bookIssueRoutes);
 app.use('/api/approve',approveRoutes);
 app.use('/api/issued',issuedRoutes);
 app.use('/api/return',returnBookRoutes);
+app.use('/api/fine',fineStudents);
 const PORT=process.env.PORT || 4000;
 app.listen(PORT,()=>{
   console.log(`Server is listening to http://localhost:${PORT}`)

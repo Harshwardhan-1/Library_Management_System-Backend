@@ -3,6 +3,7 @@ import { returnModel } from '../models/BookReturnModel';
 import { AdminBookModel } from '../models/AdminAddBookModel';
 import { issuedModel } from '../models/IssuedBookModel';
 import { Resend } from 'resend';
+import { fineModel } from '../models/FineStudentModel';
 const resend=new Resend(process.env.RESEND_API_KEY);
 
 
@@ -28,8 +29,17 @@ const today=new Date();
 const diffTime=today.getTime()-issueDate.getTime();
 const diffDays=diffTime /(1000 * 60 * 60 * 24);
 if(diffDays>3){
+    const createIt=await fineModel.create({
+        userId,
+        name,
+        gmail,
+        isbn,
+        author,
+        returnDate:Date.now(),
+    });
     return res.status(401).json({
-        message:"pay 50 rupees fine and then you can return",
+        message:"fine Model created successfully",
+        data:createIt,
     });
 }
 
