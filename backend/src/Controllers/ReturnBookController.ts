@@ -24,6 +24,11 @@ if(!increaseQuantity){
 increaseQuantity.quantity=increaseQuantity.quantity+1;
 await increaseQuantity.save();
 const issueDate=new Date(date);
+
+//just to check whether it is working properly or not
+issueDate.setDate(issueDate.getDate() - 5);
+//
+
 const today=new Date();
 
 const diffTime=today.getTime()-issueDate.getTime();
