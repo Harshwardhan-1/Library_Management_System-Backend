@@ -109,6 +109,7 @@ if(!fineRecord){
         message:"user not found",
     });
 }
+    await fineModel.deleteOne({ _id: fineRecord._id });
 const book=await AdminBookModel.findOne({isbn,author});
 if(book){
     book.quantity+=1;
