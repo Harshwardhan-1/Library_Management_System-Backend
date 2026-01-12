@@ -103,7 +103,7 @@ if(!userId || !name || !gmail || !isbn || !author){
         message:"provide proper details",
     });
 }
-const checkIt=await AdminBookModel.findOneAndDelete({userId,isbn,author});
+const checkIt=await AdminBookModel.findOneAndDelete({isbn,author});
 if(!checkIt){
     return res.status(401).json({
         message:"user not found",
