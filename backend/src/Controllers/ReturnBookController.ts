@@ -114,6 +114,7 @@ if(book){
     book.quantity+=1;
     await book.save();
 }
+await issuedModel.findOneAndDelete({userId,isbn,author});
 await resend.emails.send({
     from: process.env.EMAIL_FROM!,
       to: gmail,
