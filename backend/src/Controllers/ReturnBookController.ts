@@ -67,7 +67,7 @@ if(!userId || !isbn || !author){
         message:"provide proper detail",
     });
 }
-const findIt=await issuedModel.findOneAndDelete({isbn,author});
+const findIt=await issuedModel.findOneAndDelete({userId,isbn,author});
 if(!findIt){
 return res.status(401).json({
     message:"not found",
