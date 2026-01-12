@@ -4,6 +4,7 @@ import { AdminBookModel } from '../models/AdminAddBookModel';
 import { issuedModel } from '../models/IssuedBookModel';
 import { Resend } from 'resend';
 import { fineModel } from '../models/FineStudentModel';
+import { approveModel } from '../models/ApproveModel';
 const resend=new Resend(process.env.RESEND_API_KEY);
 
 
@@ -116,6 +117,9 @@ if(book){
     await book.save();
 }
 await issuedModel.findOneAndDelete({userId,isbn,author});
+
+const approve=await approveModel.findOneAndDelete({userId,isbn,author});
+
 await resend.emails.send({
     from: process.env.EMAIL_FROM!,
       to: gmail,
