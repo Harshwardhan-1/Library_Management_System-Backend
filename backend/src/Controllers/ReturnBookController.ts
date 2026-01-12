@@ -92,3 +92,35 @@ return res.status(200).json({
     message:"user Deleted",
 });
 }
+
+
+
+
+export const paidFine=async(req:Request,res:Response)=>{
+const {userId,name,gmail,isbn,author}=req.body;
+if(!userId || !name || !gmail || !isbn || !author){
+    return res.status(401).json({
+        message:"provide proper details",
+    });
+}
+const checkIt=await AdminBookModel.findOneAndDelete({userId,isbn,author});
+if(!checkIt){
+    return res.status(401).json({
+        message:"user not found",
+    });
+}
+checkIt.quantity=checkIt.quantity+1;
+await checkIt.save();
+await resend.emails.send({
+    from: process.env.EMAIL_FROM!,
+      to: gmail,
+      subject: "you have successfully return book",
+      text: `Hello ${name} you have successfully pay the fine and return the book Thanks.
+
+       Regards,
+       HarshLibrary Team`,
+})
+return res.status(201).json({
+    message:"user successfully pay fine",
+});
+}
