@@ -103,14 +103,17 @@ if(!userId || !name || !gmail || !isbn || !author){
         message:"provide proper details",
     });
 }
-const checkIt=await AdminBookModel.findOneAndDelete({isbn,author});
-if(!checkIt){
+const fineRecord=await fineModel.findOne({userId,isbn,author});
+if(!fineRecord){
     return res.status(401).json({
         message:"user not found",
     });
 }
-checkIt.quantity=checkIt.quantity+1;
-await checkIt.save();
+const book=await AdminBookModel.findOne({isbn,author});
+if(book){
+    book.quantity+=1;
+    await book.save();
+}
 await resend.emails.send({
     from: process.env.EMAIL_FROM!,
       to: gmail,
